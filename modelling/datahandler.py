@@ -3,7 +3,7 @@ from pathlib import Path
 from torch.utils.data import DataLoader
 from torchvision import transforms
 
-from segdataset import SegmentationDataset
+from modelling.segdataset import SegmentationDataset
 
 
 def get_dataloader_sep_folder(data_dir: str,
@@ -83,7 +83,7 @@ def get_dataloader_single_folder(data_dir: str,
         x: SegmentationDataset(data_dir,
                                image_folder=image_folder,
                                mask_folder=mask_folder,
-                               seed=100,
+                               seed=42,
                                fraction=fraction,
                                subset=x,
                                transforms=data_transforms)
@@ -92,8 +92,7 @@ def get_dataloader_single_folder(data_dir: str,
     dataloaders = {
         x: DataLoader(image_datasets[x],
                       batch_size=batch_size,
-                      shuffle=True,
-                      num_workers=8)
+                      shuffle=True)
         for x in ['Train', 'Test']
     }
     return dataloaders

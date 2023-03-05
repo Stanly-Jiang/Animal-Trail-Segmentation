@@ -1,5 +1,5 @@
 """ DeepLabv3 Model download and change the head for your prediction"""
-from torchvision.models.segmentation.deeplabv3 import DeepLabHead
+from torchvision.models.segmentation.deeplabv3 import DeepLabHead, DeepLabV3_ResNet101_Weights
 from torchvision import models
 
 
@@ -13,7 +13,7 @@ def createDeepLabv3(outputchannels=1):
     Returns:
         model: Returns the DeepLabv3 model with the ResNet101 backbone.
     """
-    model = models.segmentation.deeplabv3_resnet101(pretrained=True,
+    model = models.segmentation.deeplabv3_resnet101(weights=DeepLabV3_ResNet101_Weights.DEFAULT,
                                                     progress=True)
     model.classifier = DeepLabHead(2048, outputchannels)
     # Set the model in training mode

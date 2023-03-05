@@ -19,6 +19,8 @@ def rename_images(images_dir, masks_dir):
             os.rename(os.path.join(masks_dir, masks[i]),
                       os.path.join(masks_dir, '{:03d}_label.PNG'.format(i + 1)))
 
-images_dir = "D:/Storage/Random_Stuff/Stanl/DigitizationWork/AFSCRunningModel/dev_workflow/DeepLabV3/DeepLabv3FineTuning-master/data/Images"
-masks_dir = "D:/Storage/Random_Stuff/Stanl/DigitizationWork/AFSCRunningModel/dev_workflow/DeepLabV3/DeepLabv3FineTuning-master/data/Masks"
+#revise to data directory 
+images_dir = './data/train_data/images'
+masks_dir = './data/train_data/masks'
 rename_images(images_dir, masks_dir)
+
