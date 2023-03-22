@@ -51,9 +51,6 @@ $ source venv/Scripts/activate
 -> (venv)
 deactivate
 
-Copilot:
-Ctr+enter for suggestions, comment, tab/enter
-
 ./ means start in the relative current directory 
 ../ means start in the relative directory but one directory level up 
 
