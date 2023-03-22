@@ -4,6 +4,7 @@
 ![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1073807316593410171/1087915783558004826/image.png)
 
 
+# Miscelaneous notes for setting up the environment and running the code, I will organize this later
 
 Bash terminal
 -Copy path to data:
@@ -55,7 +56,7 @@ deactivate
 ../ means start in the relative directory but one directory level up 
 
 
-## For Model Data Preparation
+## For Model Data Preparation (old notes, will be updated later)
 
 after successfully running step 1a with correct output - anno and image files in the samples folder, 
 you can directly run step1b that creates samples_reformatted
