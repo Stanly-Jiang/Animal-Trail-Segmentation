@@ -1,5 +1,10 @@
 # Animal-Trail-Segmentation
 
+
+![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1073807316593410171/1087915783558004826/image.png)
+
+
+
 Bash terminal
 -Copy path to data:
 
