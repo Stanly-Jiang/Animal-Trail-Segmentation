@@ -13,6 +13,9 @@ from tqdm import tqdm
 def train_model(model, criterion, dataloaders, optimizer, metrics=None, bpath=None,
                 num_epochs=None, train_transforms=None, test_transforms=None,
                 save_best_model=False):
+    
+# def train_model(model, criterion, dataloaders, optimizer, metrics=None, bpath=None,
+#                 num_epochs=None, save_best_model=False):
     since = time.time()
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 1e10
@@ -29,13 +32,11 @@ def train_model(model, criterion, dataloaders, optimizer, metrics=None, bpath=No
 
     if train_transforms is None:
         train_transforms = transforms.Compose([
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomVerticalFlip(),
-            transforms.RandomRotation(360),
-            #transforms.ColorJitter(brightness=0.9, contrast=0.4, saturation=0.4, hue=0.1),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.5),
+            transforms.RandomRotation(360, expand=True, p=0.5),
             transforms.ToTensor()
         ])
-
     if test_transforms is None:
         test_transforms = transforms.Compose([
             transforms.ToTensor()

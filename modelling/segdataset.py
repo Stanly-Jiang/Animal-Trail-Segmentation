@@ -1,50 +1,25 @@
-"""
-Author: Manpreet Singh Minhas
-Contact: msminhas at uwaterloo ca
-"""
 from pathlib import Path
 from typing import Any, Callable, Optional
 
 import numpy as np
 from PIL import Image
 from torchvision.datasets.vision import VisionDataset
+from torchvision.transforms import Compose, RandomHorizontalFlip, RandomRotation, RandomVerticalFlip
 
 
 class SegmentationDataset(VisionDataset):
-    """A PyTorch dataset for image segmentation task.
-    The dataset is compatible with torchvision transforms.
-    The transforms passed would be applied to both the Images and Masks.
-    """
     def __init__(self,
                  root: str,
                  image_folder: str,
                  mask_folder: str,
-                 transforms: Optional[Callable] = None,
+                 transforms: Optional[Callable] = None, 
                  seed: int = None,
                  fraction: float = None,
                  subset: str = None,
                  image_color_mode: str = "rgb",
-                 mask_color_mode: str = "grayscale") -> None:
-        """
-        Args:
-            root (str): Root directory path.
-            image_folder (str): Name of the folder that contains the images in the root directory.
-            mask_folder (str): Name of the folder that contains the masks in the root directory.
-            transforms (Optional[Callable], optional): A function/transform that takes in
-            a sample and returns a transformed version.
-            E.g, ``transforms.ToTensor`` for images. Defaults to None.
-            seed (int, optional): Specify a seed for the train and test split for reproducible results. Defaults to None.
-            fraction (float, optional): A float value from 0 to 1 which specifies the validation split fraction. Defaults to None.
-            subset (str, optional): 'Train' or 'Test' to select the appropriate set. Defaults to None.
-            image_color_mode (str, optional): 'rgb' or 'grayscale'. Defaults to 'rgb'.
-            mask_color_mode (str, optional): 'rgb' or 'grayscale'. Defaults to 'grayscale'.
+                 mask_color_mode: str = "grayscale",
+                 augmentation: bool = False):
 
-        Raises:
-            OSError: If image folder doesn't exist in root.
-            OSError: If mask folder doesn't exist in root.
-            ValueError: If subset is not either 'Train' or 'Test'
-            ValueError: If image_color_mode and mask_color_mode are either 'rgb' or 'grayscale'
-        """
         super().__init__(root, transforms)
         image_folder_path = Path(self.root) / image_folder
         mask_folder_path = Path(self.root) / mask_folder
@@ -92,6 +67,15 @@ class SegmentationDataset(VisionDataset):
                     int(np.ceil(len(self.image_list) * (1 - self.fraction))):]
                 self.mask_names = self.mask_list[
                     int(np.ceil(len(self.mask_list) * (1 - self.fraction))):]
+        
+        # # Augmentation is only applied to the training set
+        # self.augmentation = augmentation
+        # if self.augmentation and subset == "Train":
+        #     self.transforms = Compose([
+        #         RandomHorizontalFlip(p=0.5),
+        #         RandomVerticalFlip(p=0.5),
+        #         RandomRotation(180, expand=True, p=0.5) 
+        #     ])
 
     def __len__(self) -> int:
         return len(self.image_names)
@@ -112,6 +96,16 @@ class SegmentationDataset(VisionDataset):
             elif self.mask_color_mode == "grayscale":
                 mask = mask.convert("L")
             sample = {"image": image, "mask": mask}
+
+            # if self.augmentation: 
+            #     self.transforms = Compose([
+            #         RandomHorizontalFlip(p=0.5),
+            #         RandomVerticalFlip(p=0.5),
+            #         RandomRotation(180, expand=True, p=0.5) 
+            #     ]) 
+            #     sample["image"] = self.transforms(sample["image"])
+            #     sample["mask"] = self.transforms(sample["mask"]) 
+
             if self.transforms:
                 sample["image"] = self.transforms(sample["image"])
                 sample["mask"] = self.transforms(sample["mask"])

@@ -80,19 +80,22 @@ def get_dataloader_single_folder(data_dir: str,
     data_transforms = transforms.Compose([transforms.ToTensor()])
 
     image_datasets = {
-        x: SegmentationDataset(data_dir,
+        entry: SegmentationDataset(data_dir,
                                image_folder=image_folder,
                                mask_folder=mask_folder,
                                seed=42,
                                fraction=fraction,
-                               subset=x,
+                               subset=entry,
                                transforms=data_transforms)
-        for x in ['Train', 'Test']
+        for entry in ['Train', 'Test']
     }
     dataloaders = {
         x: DataLoader(image_datasets[x],
                       batch_size=batch_size,
                       shuffle=True)
         for x in ['Train', 'Test']
-    }
+    } 
+
+    # dataloaders = {}
+    # dataloaders
     return dataloaders
