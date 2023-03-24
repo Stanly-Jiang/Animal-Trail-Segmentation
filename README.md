@@ -1,8 +1,8 @@
 # Animal-Trail-Segmentation
 
 
-![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1073807316593410171/1087915783558004826/image.png)
-
+![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1077799518667559012/1088896030352883772/image.png)
+![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1077799518667559012/1088896806668218509/image.png)
 
 # Miscelaneous notes for setting up the environment and running the code, I will organize this later
 
