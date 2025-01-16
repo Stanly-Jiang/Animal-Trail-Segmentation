@@ -4,15 +4,14 @@
 ![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1077799518667559012/1088896030352883772/image.png)
 ![Loss_Function_Plot](https://cdn.discordapp.com/attachments/1077799518667559012/1088896806668218509/image.png)
 
-# Miscelaneous notes for setting up the environment and running the code, I will organize this later
-
+# Miscelaneous Rough Notes for Setting up the Environment and Running the Code
 Bash terminal
 -Copy path to data:
 
--data path
+-data path example
 "D:\Storage\Random_Stuff\Stanl\DigitizationWork\Animal-Trail-Segmentation\data\data"
 
-Copy path
+Copy path example
 D:\Storage\Random_Stuff\Stanl\DigitizationWork\Animal-Trail-Segmentation\data\train_data
 echo "D:\Storage\Random_Stuff\Stanl\DigitizationWork\Animal-Trail-Segmentation\data\train_data" | sed 's/\\/\//g'
 D:/Storage/Random_Stuff/Stanl/DigitizationWork/Animal-Trail-Segmentation/data/train_data
@@ -56,7 +55,7 @@ deactivate
 ../ means start in the relative directory but one directory level up 
 
 
-## For Model Data Preparation (old notes, will be updated later)
+## For Model Data Preparation (old notes)
 
 after successfully running step 1a with correct output - anno and image files in the samples folder, 
 you can directly run step1b that creates samples_reformatted
